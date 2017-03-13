@@ -1,6 +1,6 @@
 import React from "react";
 
-import Movie from "../movie/Movie";
+import Movie from "../../components/movie/Movie";
 import MoviesStore from "../../stores/MoviesStore";
 
 export default class Movies extends React.Component {
