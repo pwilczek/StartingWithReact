@@ -2,6 +2,10 @@ import React from "react";
 
 export default class Left extends React.Component {
 
+  constructor() {
+    super();
+  }
+
   handle(element) {
     this.props.handler(element.target.value);
   }
