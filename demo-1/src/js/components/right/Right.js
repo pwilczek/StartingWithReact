@@ -6,8 +6,24 @@ import ItemsStore from "../../stores/ItemsStore";
 export default class Right extends React.Component {
   constructor() {
     super();
+    this.updateItems = this.updateItems.bind(this);
     this.state = { items: ItemsStore.load() };
   }
+
+  componentWillMount() {
+    ItemsStore.on("NEW_ITEM_ADDED", this.updateItems);
+  }
+
+  componentWillUnmount() {
+    itemStore.removeListener("NEW_ITEM_ADDED", this.updateItems);
+  }
+
+  updateItems() {
+    this.setState({
+      items: ItemsStore.load()
+    });
+  }
+
   render() {
     //
     const { items } = this.state;
@@ -18,7 +34,7 @@ export default class Right extends React.Component {
     return (
         <div>
           <div>And the message is {this.props.message}</div>
-          <ul>{result}</ul>
+            <ul>{result}</ul>
         </div>
     );
   }

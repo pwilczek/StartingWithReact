@@ -1,4 +1,5 @@
 import EventEmitter from "events"
+import dispatcher from "../Dispatcher"
 
 class ItemsStore extends EventEmitter {
   constructor() {
@@ -9,9 +10,24 @@ class ItemsStore extends EventEmitter {
     ];
   }
 
+  actionListener(action) {
+    switch(action.type) {
+      case "NEW_ITEM": {
+        this.newItem(action.id, action.title);
+      }
+    }
+  }
+
   load() {
     return this.items;
   }
+
+  newItem(id, title) {
+    this.items.push({id, title});
+    this.emit("NEW_ITEM_ADDED");
+  }
 }
 
-export default new ItemsStore;
+const itemStore = new ItemsStore;
+dispatcher.register(itemStore.actionListener.bind(itemStore));
+export default itemStore;
