@@ -13,4 +13,5 @@ class ItemsStore extends EventEmitter {
     return this.items;
   }
 }
+
 export default new ItemsStore;
